@@ -21,6 +21,7 @@ s_list	*indices(s_list **s)
 	
 	nofindices = listsize(s);
 	tmp = *s;
+	tmp2 = copylist(s);
 	while (tmp)
 	{
 		if (tmp->content == minimum (s))
@@ -30,7 +31,6 @@ s_list	*indices(s_list **s)
 		else
 		{
 			i = 0;
-			tmp2 = copylist(s);
 			while (tmp2)
 			{
 				if (tmp2->content < tmp->content)
@@ -39,9 +39,9 @@ s_list	*indices(s_list **s)
 			}
 			tmp->content = i;
 		}
-        listclear(&tmp2);
         tmp = tmp->next;
 	}
+	listclear(&tmp2);
     return (tmp);
 }
 
