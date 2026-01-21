@@ -6,16 +6,16 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 20:56:27 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/20 21:30:47 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/29 16:17:52 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rr(s_list **s)
+static void	rrrr(t_list **s)
 {
-	s_list	*n;
-	s_list	*tmp;
+	t_list	*n;
+	t_list	*tmp;
 
 	if (!s || !*s || !(*s)->next)
 		return ;
@@ -29,19 +29,22 @@ static void	rr(s_list **s)
 	*s = n;
 	tmp->next = NULL;
 }
-void	rra(s_list **s)
+
+void	rra(t_list **s)
 {
-	rr(s);
+	rrrr(s);
 	write(1, "rra\n", 4);
 }
-void	rrb(s_list **s)
+
+void	rrb(t_list **s)
 {
-	rr(s);
+	rrrr(s);
 	write(1, "rrb\n", 4);
 }
-void	rrr(s_list **s1, s_list **s2)
+
+void	rrr(t_list **s1, t_list **s2)
 {
-	rr(s1);
-	rr(s2);
+	rrrr(s1);
+	rrrr(s2);
 	write(1, "rrr\n", 4);
 }

@@ -6,65 +6,104 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/24 11:43:03 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/24 11:47:42 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/30 16:17:34 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.c"
+#include "push_swap.h"
 
-s_list	*indices(s_list **s)
+static t_list	**copylist(t_list **s)
 {
-	int i;
-	int nofindices;
-	s_list	*tmp;
-	s_list	*tmp2;
-	
-	nofindices = listsize(s);
-	tmp = *s;
-	tmp2 = copylist(s);
-	while (tmp)
-	{
-		if (tmp->content == minimum (s))
-			tmp->content = 0;
-		else if (tmp->content == maximum (s))
-			tmp->content = nofindices - 1;
-		else
-		{
-			i = 0;
-			while (tmp2)
-			{
-				if (tmp2->content < tmp->content)
-					i++;
-				tmp2 = tmp2->next;
-			}
-			tmp->content = i;
-		}
-        tmp = tmp->next;
-	}
-	listclear(&tmp2);
-    return (tmp);
-}
-
-static s_list	*copylist(s_list **s)
-{
-	s_list	*copy;
-	s_list	*tmp;
-	s_list	*nnode;
+	t_list	**copy;
+	t_list	*tmp;
+	t_list	*nnode;
 
 	if (!*s)
 		return (NULL);
-	copy = NULL;
+	copy = malloc(sizeof(t_list *));
+	if (!copy)
+		return (NULL);
+	*copy = NULL;
 	tmp = *s;
 	while (tmp)
 	{
 		nnode = cnode(tmp->content);
 		if (!nnode)
 		{
-			listclear(&copy);
+			listclear(copy);
 			return (NULL);
 		}
-		anode(&copy, nnode);
+		anode(copy, nnode);
 		tmp = tmp->next;
 	}
 	return (copy);
+}
+
+t_list	**indices(t_list **s)
+{
+	int		i;
+	t_list	*tmp;
+	t_list	**s2;
+	t_list	*tmp2;
+	t_list	*tmp3;
+
+	tmp = *s;
+	s2 = copylist(s);
+	if (!s2)
+		return (NULL);
+	tmp2 = *s2;
+	while (tmp2)
+	{
+		i = 0;
+		tmp3 = *s2;
+		while (tmp3)
+		{
+			if (tmp3->content < tmp2->content)
+				i++;
+			tmp3 = tmp3->next;
+		}
+		tmp->content = i;
+		tmp = tmp->next;
+		tmp2 = tmp2->next;
+	}
+	listclear(s2);
+	free(s2);
+	return (s);
+}
+
+void	indicestobinary(t_list **s)
+{
+	int		i;
+	int		j;
+	int		max;
+	int		size;
+	t_list	**b;
+
+	i = -1;
+	max = 0;
+	s = indices(s);
+	size = listsize(s);
+	if (size <= 1)
+		return;
+	b = malloc(sizeof(t_list *));
+	if (!b)
+		return ;
+	*b = NULL;
+	while (((size - 1) >> max))
+		max++;
+	while (++i < max)
+	{
+		j = -1;
+		while (++j < size)
+		{
+			if ((((*s)->content >> i) & 1) == 0)
+				pb(s, b);
+			else
+				ra(s);
+		}
+		while (*b)
+			pa(s, b);
+	}
+	listclear(b);
+	free(b);
 }

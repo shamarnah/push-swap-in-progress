@@ -6,17 +6,17 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 16:40:19 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/23 17:10:49 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/29 17:06:58 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-s_list	*cnode(long x)
+t_list	*cnode(long x)
 {
-	s_list	*s;
+	t_list	*s;
 
-	s = malloc(sizeof(s_list));
+	s = malloc(sizeof(t_list));
 	if (!s)
 		return (NULL);
 	s->content = x;
@@ -24,13 +24,13 @@ s_list	*cnode(long x)
 	return (s);
 }
 
-void	anode(s_list **s, s_list *cn)
+void	anode(t_list **s, t_list *cn)
 {
-	s_list	*tmp;
+	t_list	*tmp;
 
-	if (!cn || !s)
+	if (!cn)
 		return ;
-	if (!*s)
+	if (!*s || !s)
 	{
 		*s = cn;
 		return ;
@@ -41,10 +41,10 @@ void	anode(s_list **s, s_list *cn)
 	tmp->next = cn;
 }
 
-void	listclear(s_list **s)
+void	listclear(t_list **s)
 {
-	s_list	*tmp;
-	s_list	*tmp2;
+	t_list	*tmp;
+	t_list	*tmp2;
 
 	if (!s || !*s)
 		return ;
@@ -58,13 +58,13 @@ void	listclear(s_list **s)
 	(*s) = NULL;
 }
 
-int	listsize(s_list **s)
+int	listsize(t_list **s)
 {
-	s_list	*tmp;
+	t_list	*tmp;
 	int		i;
 
 	if (!s)
-		return (NULL);
+		return (0);
 	i = 0;
 	tmp = *s;
 	while (tmp)

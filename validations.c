@@ -6,7 +6,7 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 20:15:25 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/24 12:12:51 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/30 15:22:37 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,45 +19,44 @@ int	digit(char *s)
 	i = 0;
 	if (!s[i])
 		return (0);
+	while (s[i] == ' ')
+		i++;
+	if (s[i] == '+' || s[i] == '-')
+		i++;
 	while (s[i])
 	{
-		if (s[i] == '+' || s[i] == '-')
-			i++;
-		else if (s[i] < 48 || s[i] > 57)
+		if (s[i] < 48 || s[i] > 57)
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int	repeated(char *s)
+int	repeated(t_list **s)
 {
-	int	i;
-	int	j;
-	
-	i = 0;
-	if (!s)
-		return 0;
-	while (s[i])
-	{
-		long	x;
-		long	y;
+	int		i;
+	t_list	*tmp;
+	t_list	*tmp2;
 
-		x = ft_atol(s[i]);
-		j = i + 1;
-		while (s[j])
+	if (!*s)
+		return (0);
+	i = 0;
+	tmp = *s;
+	while (tmp)
+	{
+		tmp2 = tmp->next;
+		while (tmp2)
 		{
-			y = ft_atol(s[j]);
-			if (x == y)
-				return 0;
-			j++;
+			if (tmp->content == tmp2->content)
+				return (0);
+			tmp2 = tmp2->next;
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	return (1);
 }
 
-int	issorted(s_list *s)
+int	issorted(t_list *s)
 {
 	if (!s || !s->next)
 		return (1);
@@ -70,10 +69,10 @@ int	issorted(s_list *s)
 	return (1);
 }
 
-int	minimum(s_list **s)
+int	minimum(t_list **s)
 {
-	long min;
-	s_list *tmp;
+	long	min;
+	t_list	*tmp;
 
 	tmp = *s;
 	min = tmp->content;

@@ -6,13 +6,13 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 18:00:28 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/21 18:43:46 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/29 15:16:55 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	s(s_list **s)
+static void	s(t_list **s)
 {
 	long	tmp;
 
@@ -23,19 +23,19 @@ static void	s(s_list **s)
 	(*s)->next->content = tmp;
 }
 
-void	sa(s_list **s1)
+void	sa(t_list **s1)
 {
 	s(s1);
 	write(1, "sa\n", 3);
 }
 
-void	sb(s_list **s1)
+void	sb(t_list **s1)
 {
 	s(s1);
 	write(1, "sb\n", 3);
 }
 
-void	ss(s_list **s1, s_list **s2)
+void	ss(t_list **s1, t_list **s2)
 {
 	s(s1);
 	s(s2);

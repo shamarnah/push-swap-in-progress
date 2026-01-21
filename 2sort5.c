@@ -6,18 +6,18 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/21 18:42:26 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/23 17:08:55 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/29 16:52:38 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	two(s_list **s)
+void	two(t_list **s)
 {
 	sa(s);
 }
 
-void	three(s_list **s)
+void	three(t_list **s)
 {
 	long	first;
 	long	second;
@@ -26,7 +26,7 @@ void	three(s_list **s)
 	first = (*s)->content;
 	second = (*s)->next->content;
 	third = (*s)->next->next->content;
-	if (first < second && first < third)
+	if (first < second && first < third && third < second)
 	{
 		rra(s);
 		sa(s);
@@ -37,17 +37,17 @@ void	three(s_list **s)
 		rra(s);
 	else if (first > second && first > third && second < third)
 		ra(s);
-	else if (first > second && first < third && second < third)
+	else if (first > second && first > third && second > third)
 	{
 		ra(s);
 		sa(s);
 	}
 }
 
-void	four(s_list **s, s_list **b)
+void	four(t_list **s, t_list **b)
 {
 	long	min;
-	s_list	*tmp;
+	t_list	*tmp;
 	int		count;
 
 	count = 0;
@@ -67,12 +67,13 @@ void	four(s_list **s, s_list **b)
 	pb(s, b);
 	three(s);
 	pa(s, b);
+	listclear(b);
 }
 
-void	five(s_list **s, s_list **b)
+void	five(t_list **s, t_list **b)
 {
 	long	min;
-	s_list	*tmp;
+	t_list	*tmp;
 	int		count;
 
 	count = 0;
@@ -92,4 +93,5 @@ void	five(s_list **s, s_list **b)
 	pb(s, b);
 	four(s, b);
 	pa(s, b);
+	listclear(b);
 }

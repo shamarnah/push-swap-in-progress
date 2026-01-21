@@ -6,15 +6,15 @@
 /*   By: samarnah <samarnah@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 20:37:18 by samarnah          #+#    #+#             */
-/*   Updated: 2025/12/20 20:57:02 by samarnah         ###   ########.fr       */
+/*   Updated: 2025/12/29 15:16:55 by samarnah         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	r(s_list **s)
+static void	r(t_list **s)
 {
-	s_list	*n;
+	t_list	*n;
 
 	if (!s || !*s || !(*s)->next)
 		return ;
@@ -26,17 +26,20 @@ static void	r(s_list **s)
 	n = n->next;
 	n->next = NULL;
 }
-void	ra(s_list **s)
+
+void	ra(t_list **s)
 {
 	r(s);
 	write(1, "ra\n", 3);
 }
-void	rb(s_list **s)
+
+void	rb(t_list **s)
 {
 	r(s);
 	write(1, "rb\n", 3);
 }
-void	rr(s_list **s1, s_list **s2)
+
+void	rr(t_list **s1, t_list **s2)
 {
 	r(s1);
 	r(s2);
